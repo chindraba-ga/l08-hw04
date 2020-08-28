@@ -17,7 +17,6 @@
       margin: 0;
       padding: 0;
     }
-* { border: 1px solid toggle(green red gold brown blue purple);}
   /* Layout the entire page as a grid, with 1 column per row */
     #container {
       padding: 8px;
@@ -295,7 +294,7 @@
     /* The main setting, modified by specific settings */
     #container {
       color: rgba(34,34,34,1); /* rgb(236,236,236) --page-frgColor */ 
-      background-color: rgba(0,0,0,0,0); /* rgb(43,0,0) ---page-bkgColor */
+      background-color: rgba(0,0,0,0); /* rgb(43,0,0) ---page-bkgColor */
     }
     #dark-mode:checked ~ #container {
       color: rgb(236,236,236); /* #ececec --page-frgColor */
@@ -384,7 +383,7 @@
       background-color: rgb(71,78,82); /* #474e52 --foot-bkgColor */
     }
     #dark-mode:checked ~ #container .onColorFoot {
-      background-color: rgb(); /* --foot-bkgColor  */
+      background-color: rgb(34,34,34); /* --foot-bkgColor  */
     }
     .onColorMain {
       background-color: rgb(255,255,255); /* #ffffff --main-bkgColor */
@@ -429,6 +428,85 @@
     #light-mode:checked ~ #container #light-switch {
       display: none;
     }
+    .modal-switch {
+      display: none;
+    }
+    #modal-cover {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(0,0,0,.33);
+      background-blend-mode: multiply;
+      visibility: hidden;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-dialog-box {
+      width: 200px;
+      height: 150px;
+      padding: .3em .7em;
+      border: 5px solid green;
+      font-size: 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      position: absolute;
+      transform: rotateY(-90deg);
+      transition: transform 1.5s ease-out;
+    }
+    .modal-dialog-box p {
+      margin: .15em 1.5em;
+    }
+    .modal-button {
+      padding: .3em 3em;
+      cursor: pointer;
+      transform: rotateX(-90deg);
+      transition: transform 1s ease-out;
+      transition-delay: 1.5s;
+    }
+    .modal-button:hover {
+      background-color: darkgreen;
+    }
+    #modal-clear:checked ~ #modal-layouts .modal-dialog-box {
+      transform: rotateY(-90deg);
+      transition: transform .1s linear;
+    }
+    #modal-clear:checked ~ #modal-layouts .modal-button {
+      transform: rotateX(-90deg);
+      transition: transform .1s linear;
+    }
+    #modal-clear:not(:checked) ~ #modal-layouts { visibility: visible; }
+    #modal-clear:not(:checked) ~ #modal-layouts #modal-cover { visibility: visible; }
+    #modal-1:checked ~ #modal-layouts #modal-dialog-1 { transform: rotateY(0deg); }
+    #modal-2:checked ~ #modal-layouts #modal-dialog-2 { transform: rotateY(0deg); }
+    #modal-3:checked ~ #modal-layouts #modal-dialog-3 { transform: rotateY(0deg); }
+    #modal-4:checked ~ #modal-layouts #modal-dialog-4 { transform: rotateY(0deg); }
+    .modal-activate:checked ~ #modal-layouts .modal-button {
+      transform: rotateY(0deg);
+    }
+    @media only screen AND (min-width: 479.5px) {
+      .modal-dialog-box {
+        width: calc(270px + (650 - 200) * ((100vw - 480px) / (1050 - 480)));
+        height: calc(95px + (250 - 150) * ((100vw - 480px) / (1050 - 480)));
+        font-size: calc(14px + (20 - 14) * ((100vw - 480px) / (1050 - 480)));
+        font-weight: 600;
+      }
+    }
+    @media only screen AND (min-width: 1049.5px) {
+      .modal-dialog-box {
+        width: 650px;
+        height: 250px;
+        font-size: 20px;
+        font-weight: 800;
+      }
+    }
   </style>
 </head>
 <body>
@@ -466,7 +544,7 @@
       <div id="report-tally"><span id="search-result-tally">79</span> homes available on Trulia</div>
     </header>
     <main id="showcase" class="onColorAccent" role="region" aria-labelledby="pagination-results">
-      <a href="#" class="unit-listing onColorMain list-higher">
+      <label for="modal-1" class="unit-listing onColorMain list-higher">
         <section class="unit-photo bright" aria-hidden="true">
           <div class="unit-photo" style="background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2522641/house-1.jpg')" title="Photo of unit at 3205 Georgia Ave NW #403">
             <span class="unit-new">New</span><span class="unit-owner">For Sale by Owner</span>
@@ -490,8 +568,8 @@
             </div>
           </section>
         </section>
-      </a>
-      <a href="#" class="unit-listing onColorMain new-list">
+      </label>
+      <label for="modal-1" class="unit-listing onColorMain new-list">
         <section class="unit-photo bright" aria-hidden="true">
           <div class="unit-photo" style="background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2522641/house-2.jpg')" title="Photo of unit at 3615 10th St NW #8">
             <span class="unit-new">New</span><span class="unit-owner">For Sale by Owner</span>
@@ -515,8 +593,8 @@
             </div>
           </section>
         </section>
-      </a>
-      <a href="#" class="unit-listing onColorMain list-lower">
+      </label>
+      <label for="modal-2" class="unit-listing onColorMain list-lower">
         <section class="unit-photo bright" aria-hidden="true">
           <div class="unit-photo" style="background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2522641/house-3.jpg')" title="Photo of unit at 3120 Park Pl NW">
             <span class="unit-new">New</span><span class="unit-owner">For Sale by Owner</span>
@@ -540,8 +618,8 @@
             </div>
           </section>
         </section>
-      </a>
-      <a href="#" class="unit-listing onColorMain">
+      </label>
+      <label for="modal-1" class="unit-listing onColorMain">
         <section class="unit-photo bright" aria-hidden="true">
           <div class="unit-photo" style="background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2522641/house-4.jpg')" title="Photo of unit at 3221 Warder St NW #1">
             <span class="unit-new">New</span><span class="unit-owner">For Sale by Owner</span>
@@ -565,8 +643,8 @@
             </div>
           </section>
         </section>
-      </a>
-      <a href="#" class="unit-listing onColorMain list-higher">
+      </label>
+      <label for="modal-4" class="unit-listing onColorMain list-higher">
         <section class="unit-photo bright" aria-hidden="true">
           <div class="unit-photo" style="background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2522641/house-5.jpg')" title="Photo of unit at 705 Kenyon St NW">
             <span class="unit-new">New</span><span class="unit-owner">For Sale by Owner</span>
@@ -590,8 +668,8 @@
             </div>
           </section>
         </section>
-      </a>
-      <a href="#" class="unit-listing onColorMain new-list">
+      </label>
+      <label for="modal-2" class="unit-listing onColorMain new-list">
         <section class="unit-photo bright" aria-hidden="true">
           <div class="unit-photo" style="background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2522641/house-6.jpg')" title="Photo of unit at 1363 Oak St NW">
             <span class="unit-new">New</span><span class="unit-owner">For Sale by Owner</span>
@@ -615,8 +693,8 @@
             </div>
           </section>
         </section>
-      </a>
-      <a href="#" class="unit-listing onColorMain">
+      </label>
+      <label for="modal-1" class="unit-listing onColorMain">
         <section class="unit-photo bright" aria-hidden="true">
           <div class="unit-photo" style="background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2522641/house-7.jpg')" title="Photo of unit at 1307 Irving St NW #1">
             <span class="unit-new">New</span><span class="unit-owner">For Sale by Owner</span>
@@ -640,8 +718,8 @@
             </div>
           </section>
         </section>
-      </a>
-      <a href="#" class="unit-listing onColorMain owner-list list-lower">
+      </label>
+      <label for="modal-1" class="unit-listing onColorMain owner-list list-lower">
         <section class="unit-photo bright" aria-hidden="true">
           <div class="unit-photo" style="background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2522641/house-8.jpg')" title="Photo of unit at 752 Park Rd NW">
             <span class="unit-new">New</span><span class="unit-owner">For Sale by Owner</span>
@@ -665,8 +743,8 @@
             </div>
           </section>
         </section>
-      </a>
-      <a href="#" class="unit-listing onColorMain owner-list new-list">
+      </label>
+      <label for="modal-3" class="unit-listing onColorMain owner-list new-list">
         <section class="unit-photo bright" aria-hidden="true">
           <div class="unit-photo" style="background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2522641/house-09.jpg')" title="Photo of unit at 2932 Vernon Pl NW #1">
             <span class="unit-new">New</span><span class="unit-owner">For Sale by Owner</span>
@@ -690,8 +768,8 @@
             </div>
           </section>
         </section>
-      </a>
-      <a href="#" class="unit-listing onColorMain list-higher">
+      </label>
+      <label for="modal-2" class="unit-listing onColorMain list-higher">
         <section class="unit-photo bright" aria-hidden="true">
           <div class="unit-photo" style="background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2522641/house-10.jpg')" title="Photo of unit at 3205 Georgia Ave NW, #403">
             <span class="unit-new">New</span><span class="unit-owner">For Sale by Owner</span>
@@ -715,8 +793,8 @@
             </div>
           </section>
         </section>
-      </a>
-      <a href="#" class="unit-listing onColorMain">
+      </label>
+      <label for="modal-1" class="unit-listing onColorMain">
         <section class="unit-photo bright" aria-hidden="true">
           <div class="unit-photo" style="background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2522641/house-11.jpg')" title="Photo of unit at 1356 Kenyon St NW #B">
             <span class="unit-new">New</span><span class="unit-owner">For Sale by Owner</span>
@@ -740,8 +818,8 @@
             </div>
           </section>
         </section>
-      </a>
-      <a href="#" class="unit-listing onColorMain">
+      </label>
+      <label for="modal-1" class="unit-listing onColorMain">
         <section class="unit-photo bright" aria-hidden="true">
           <div class="unit-photo" style="background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2522641/house-12.jpg')" title="Photo of unit at 3205 Georgia Ave NW, #505">
             <span class="unit-new">New</span><span class="unit-owner">For Sale by Owner</span>
@@ -765,7 +843,7 @@
             </div>
           </section>
         </section>
-      </a>
+      </label>
     </main>
     <footer id="search-pagination" class="onColorMain" role="naviagtion">
       <nav class="page-nav">
@@ -828,6 +906,31 @@
       <div id="dark-control">Enable <span id="light-switch"><label for="light-mode">light</label></span><span id="dark-switch"><label for="dark-mode">dark</label></span> mode</div>
     </div>
   </footer>
+  <input class="modal-switch" id="modal-clear" name="modal_state" type="radio" value="modal off" checked="true">
+  <input class="modal-switch modal-activate" id="modal-1" name="modal_state" type="radio" value="modal one">
+  <input class="modal-switch modal-activate" id="modal-2" name="modal_state" type="radio" value="modal two">
+  <input class="modal-switch modal-activate" id="modal-3" name="modal_state" type="radio" value="modal three">
+  <input class="modal-switch modal-activate" id="modal-4" name="modal_state" type="radio" value="modal four">
+  <section id="modal-layouts">
+    <label for="modal-clear" id="modal-cover">
+      <label for="" id="modal-dialog-1" class="modal-dialog-box onColorMain">
+        <p>Are you interested in this house? Better get 3-4 jobs or win the lottery.</p>
+        <label for="modal-clear" class="modal-button bold bright onColorNav">Let's find something else...</label>
+      </label>
+      <label for="" id="modal-dialog-2" class="modal-dialog-box onColorMain">
+        <p>Are you interested in this house? Better to local currency first. Come back when you're ready.</p>
+        <label for="modal-clear" class="modal-button bold bright onColorNav">Let's find something else...</label>
+      </label>
+      <label for="" id="modal-dialog-3" class="modal-dialog-box onColorMain">
+        <p>西洋人はこの物件を購入する傾向があります。住宅協会のルール。</p>
+        <label for="modal-clear" class="modal-button bright onColorNav">Let's find something else...</label>
+      </label>
+      <label for="" id="modal-dialog-4" class="modal-dialog-box onColorMain">
+        <p>We are unable to accept Bitcoin payments at this time. Sorry for the inconvenience.</p>
+        <label for="modal-clear" class="modal-button bold bright onColorNav">Let's find something else...</label>
+      </label>
+    </label>
+  </section>
 </div>
 </body>
 </html>
