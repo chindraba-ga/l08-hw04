@@ -445,6 +445,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      transition: visibility .7s ease-in;
     }
     .modal-dialog-box {
       width: 200px;
@@ -459,7 +460,7 @@
       align-items: center;
       position: absolute;
       transform: rotateY(-90deg);
-      transition: transform 1.5s ease-out;
+      transition: transform 1.5s ease-in;
     }
     .modal-dialog-box p {
       margin: .15em 1.5em;
@@ -468,11 +469,13 @@
       padding: .3em 3em;
       cursor: pointer;
       transform: rotateX(-90deg);
-      transition: transform 1s ease-out;
-      transition-delay: 1.5s;
+      transition: transform 1s ease-out .5s, background-color 1s ease-in .1s;
     }
     .modal-button:hover {
       background-color: darkgreen;
+    }
+    .modal-button:hover {
+      animation: pulse 1s ease 0s 1;
     }
     #modal-clear:checked ~ #modal-layouts .modal-dialog-box {
       transform: rotateY(-90deg);
@@ -506,6 +509,12 @@
         font-size: 20px;
         font-weight: 800;
       }
+    }
+    @keyframes pulse {
+      12.5%	{ transform: scale(1.005); }
+      37.5% { transform: scale(0.99);  }
+      62.5%	{ transform: scale(1.01);  }
+      87.5% { transform: scale(0.99);  }
     }
   </style>
 </head>
