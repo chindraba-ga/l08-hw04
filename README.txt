@@ -1,5 +1,5 @@
 l08-hw04
-* Status: In Progress
+* Status: Submitted
 * CodePen: <https://codepen.io/chindraba-ga/pen/>
 * Live page: <https://www.chindraba.work/fewd/l08-hw04.html>
 
