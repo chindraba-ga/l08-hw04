@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="language" content="English">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
   <meta name="author" content="Chindraba (Ronald Lamoreaux)">
   <title>Lesson 8: Assignment: Add Modal to the page from Trulia</title>
   <link href="https://yarnpkg.com/en/package/normalize.css" rel="stylesheet" type="text/css">
@@ -13,99 +14,161 @@
   <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/symbola" type="text/css"/>
   <style>
   /*  Build the theme color setup */
+    /* This page supports both dark and light color schemes, dark by preference */
+    #main-lite, #alt-lite {
+      display: none;
+    }
     /* Assign default colors to variables for use in the CSS */
     :root {
-      --base-page-bgColor:     rgba(255,255,255,1);
-      --base-page-fgColor:     rgba(0,0,0,1);
-      --base-page-linkColor:   rgba(0,128,0,1);
+      --default-background:    rgb(33,33,33);
+      --default-foreground:    rgba(251,251,251,.75);
+      --alt-background:        rgb(255,255,255);
+      --alt-foreground:        rgb(34,34,34);
+
+      --base-page-bgColor:     rgba(0,0,0,1);
+      --base-page-fgColor:     rgba(236,236,236,.85);
+      --base-page-linkColor:   rgba(231,144,60,1);
       --base-head-bgColor:     rgba(50,182,76,1);
       --base-head-fgColor:     rgba(255,255,255,1);
-      --base-foot-bgColor:     var(--base-page-bgColor);
-      --base-foot-fgColor:     var(--base-page-fgColor);
-      --base-showcase-bgColor: var(--base-page-bgColor);
+      --base-foot-bgColor:     rgba(53,60,59,1);
+      --base-foot-fgColor:     rgba(177,182,187,.5);
+      --base-showcase-bgColor: rgba(0,0,0,.85);
       --base-showcase-fgColor: var(--base-page-fgColor);
-      --base-photo-bgColor:    var(--base-page-bgColor);
-      --base-flag-newList:     rgba(45,191,102,0.70);
-      --base-flag-ownerList:   rgba(134,144,152,0.45);
-      --base-flag-textColor:   rgba(255,255,255,.95);
-      --base-icon-unitInfo:    var(--base-page-fgColor);
-      --base-flag-priceDrop:   var(--base-page-fgColor);
-      --base-flag-priceRise:   var(--base-page-fgColor);
-      --base-info-fadeColor:   var(--base-fgColor);
-      --base-modal-coverColor: rgba(255,255,255,.05)
+      --base-photo-bgColor:    rgba(0,0,0,.55);
+      --base-flag-newList:     rgba(145,217,165,.85);
+      --base-flag-ownerList:   rgba(187,189,191,.45);
+      --base-flag-textColor:   rgba(255,255,255,.85);
+      --base-icon-unitInfo:    rgba(145,217,165,.85);
+      --base-flag-priceDrop:   rgba(158,224,149,1);
+      --base-flag-priceRise:   rgba(255,54,26,1);
+      --base-info-fadeColor:   rgba(192,197,199,.85);
+      --base-modal-coverColor: rgba(0,0,0,.55);
     }
     /* Assign the colors to variables based on theme */
-    /*                  Lite theme                   */
+    /*                  Light theme                  */
     :root {
-      /* --lite-page-bgColor:     rgba(0,0,0,0); */
-      --lite-page-fgColor:     rgba(34,34,34,1);
-      --lite-page-linkColor:   rgba(58,142,82,1);
-      --lite-foot-bgColor:     rgba(71,78,82,1);
-      --lite-foot-fgColor:     rgba(177,182,187,.5);
-      --lite-showcase-bgColor: rgba(227,228,230,1);
-      --lite-photo-bgColor:    rgba(0,0,0,0);
-      --lite-icon-unitInfo:    rgb(0,0,192);
-      --lite-flag-priceDrop:   rgb(0,192,0);
-      --lite-flag-priceRise:   rgb(215,0,0);
-      --lite-info-fadeColor:   rgb(120,125,129);
+      --alt-page-bgColor:     rgba(255,255,255,1);
+      --alt-page-fgColor:     rgba(32,32,32,1);
+      --alt-page-linkColor:   rgba(0,128,0,1);
+      --alt-head-bgColor:     rgba(50,182,76,1);
+      --alt-head-fgColor:     rgba(255,255,255,1);
+      --alt-foot-bgColor:     rgba(71,78,82);
+      --alt-foot-fgColor:     rgba(177,182,187,.5);
+      --alt-showcase-bgColor: rgba(227,228,230,1);
+      --alt-showcase-fgColor: rgba(32,32,32,1);
+      --alt-photo-bgColor:    rgba(255,255,255,.95);
+      --alt-flag-newList:     rgba(45,191,102,.70);
+      --alt-flag-ownerList:   rgba(134,144,152,.45);
+      --alt-flag-textColor:   rgba(255,255,255,.95);
+      --alt-icon-unitInfo:    rgba(0,0,192,1);
+      --alt-flag-priceDrop:   rgba(0,176,0);
+      --alt-flag-priceRise:   rgba(215,0,0);
+      --alt-info-fadeColor:   rgba(0,0,0,.65);
+      --alt-modal-coverColor: rgba(255,255,255,.05);
     }
-    /*                  Dark theme                   */
-    :root {
-      --dark-page-bgColor:     rgba(43,0,0,1);
-      --dark-page-fgColor:     rgba(236,236,236,1);
-      --dark-page-linkColor:   rgba(231,144,60,1);
-      --dark-showcase-bgColor: rgba(0,0,0,.85);
-      --dark-showcase-fgColor: var(--dark-page-fgColor);
-      --dark-photo-bgColor:    rgba(0,0,0,0.55);
-      --dark-icon-unitInfo:    rgb(0,255,127);
-      --dark-flag-priceDrop:   rgb(0,212,0);
-      --dark-flag-priceRise:   rgb(180,0,0);
-      --dark-info-fadeColor:   rgb(118,195,118);
-      --dark-modal-coverColor: rgba(0,0,0,0.55);
+    @media (prefers-color-scheme: light) {
+      #main-dark, #alt-dark {
+        display: none;
+      }
+      #main-lite, #alt-lite {
+        display: inline;
+      }
+      /* Assign default colors to variables for use in the CSS */
+      :root {
+        --default-background:    rgb(255,255,255);
+        --default-foreground:    rgb(34,34,34);
+        --alt-background:        rgb(33,33,33);
+        --alt-foreground:        rgba(251,251,251,.75);
+
+        --base-page-bgColor:     rgba(255,255,255,1);
+        --base-page-fgColor:     rgba(32,32,32,1);
+        --base-page-linkColor:   rgba(0,128,0,1);
+        --base-head-bgColor:     rgba(50,182,76,1);
+        --base-head-fgColor:     rgba(255,255,255,1);
+        --base-foot-bgColor:     rgba(71,78,82);
+        --base-foot-fgColor:     rgba(177,182,187,.5);
+        --base-showcase-bgColor: rgba(227,228,230,1);
+        --base-showcase-fgColor: rgba(32,32,32,1);
+        --base-photo-bgColor:    rgba(255,255,255,.95);
+        --base-flag-newList:     rgba(45,191,102,.70);
+        --base-flag-ownerList:   rgba(134,144,152,.45);
+        --base-flag-textColor:   rgba(255,255,255,.95);
+        --base-icon-unitInfo:    rgba(0,0,192,1);
+        --base-flag-priceDrop:   rgba(0,176,0);
+        --base-flag-priceRise:   rgba(215,0,0);
+        --base-info-fadeColor:   rgba(0,0,0,.65);
+        --base-modal-coverColor: rgba(255,255,255,.05);
+      }
+      /* Assign the colors to variables based on theme */
+      /*                  Dark theme                   */
+      :root {
+        --alt-page-bgColor:     rgba(0,0,0,1);
+        --alt-page-fgColor:     rgba(236,236,236,.85);
+        --alt-page-linkColor:   rgba(231,144,60,1);
+        --alt-head-bgColor:     rgba(50,182,76,1);
+        --alt-head-fgColor:     rgba(255,255,255,1);
+        --alt-foot-bgColor:     rgba(53,60,59,1);
+        --alt-foot-fgColor:     rgba(177,182,187,.5);
+        --alt-showcase-bgColor: rgba(0,0,0,.85);
+        --alt-showcase-fgColor: var(--base-page-fgColor);
+        --alt-photo-bgColor:    rgba(0,0,0,.55);
+        --alt-flag-newList:     rgba(145,217,165,.85);
+        --alt-flag-ownerList:   rgba(187,189,191,.45);
+        --alt-flag-textColor:   rgba(255,255,255,.85);
+        --alt-icon-unitInfo:    rgba(145,217,165,.85);
+        --alt-flag-priceDrop:   rgba(158,224,149,1);
+        --alt-flag-priceRise:   rgba(255,54,26,1);
+        --alt-info-fadeColor:   rgba(192,197,199,.85);
+        --alt-modal-coverColor: rgba(0,0,0,.55);
+      }
     }
-    /* Assign overwrite colors for lite theme. Likely defaults anyway */
+    /* Assign overwrite colors for default theme. Likely defaults anyway */
     /*   values not assigned here will use the defaults above */
-    #lite-theme:checked ~ #theme-container {
-      --page-bgColor:     var(--lite-page-bgColor,     var(--base-page-bgColor));
-      --page-fgColor:     var(--lite-page-fgColor,     var(--base-page-fgColor));
-      --page-linkColor:   var(--lite-page-linkColor,   var(--base-page-linkColor));
-      --head-bgColor:     var(--lite-head-bgColor,     var(--base-head-bgColor));
-      --head-fgColor:     var(--lite-head-fgColor,     var(--base-head-fgColor));
-      --foot-bgColor:     var(--lite-foot-bgColor,     var(--base-foot-bgColor));
-      --foot-fgColor:     var(--lite-foot-fgColor,     var(--base-foot-fgColor));
-      --showcase-bgColor: var(--lite-showcase-bgColor, var(--base-showcase-bgColor));
-      --showcase-fgColor: var(--lite-showcase-fgColor, var(--base-showcase-fgColor));
-      --photo-bgColor:    var(--lite-photo-bgColor,    var(--base-photo-bgColor));
-      --flag-newList:     var(--lite-flag-newList,     var(--base-flag-newList));
-      --flag-ownerList:   var(--lite-flag-ownerList,   var(--base-flag-ownerList));
-      --flag-textColor:   var(--lite-flag-textColor,   var(--base-flag-textColor));
-      --icon-unitInfo:    var(--lite-icon-unitInfo,    var(--base-icon-unitInfo));
-      --flag-priceDrop:   var(--lite-flag-priceDrop,   var(--base-flag-priceDrop));
-      --flag-priceRise:   var(--lite-flag-priceRise,   var(--base-flag-priceRise));
-      --info-fadeColor:   var(--lite-info-fadeColor,   var(--base-info-fadeColor));
-      --modal-coverColor: var(--lite-modal-coverColor, var(--base-modal-coverColor));
+    #main-theme:checked ~ #theme-container {
+      background-color: var(--default-background);
+      color: var(--default-foreground);
+      --page-bgColor:     var(--main-page-bgColor,     var(--base-page-bgColor));
+      --page-fgColor:     var(--main-page-fgColor,     var(--base-page-fgColor));
+      --page-linkColor:   var(--main-page-linkColor,   var(--base-page-linkColor));
+      --head-bgColor:     var(--main-head-bgColor,     var(--base-head-bgColor));
+      --head-fgColor:     var(--main-head-fgColor,     var(--base-head-fgColor));
+      --foot-bgColor:     var(--main-foot-bgColor,     var(--base-foot-bgColor));
+      --foot-fgColor:     var(--main-foot-fgColor,     var(--base-foot-fgColor));
+      --showcase-bgColor: var(--main-showcase-bgColor, var(--base-showcase-bgColor));
+      --showcase-fgColor: var(--main-showcase-fgColor, var(--base-showcase-fgColor));
+      --photo-bgColor:    var(--main-photo-bgColor,    var(--base-photo-bgColor));
+      --flag-newList:     var(--main-flag-newList,     var(--base-flag-newList));
+      --flag-ownerList:   var(--main-flag-ownerList,   var(--base-flag-ownerList));
+      --flag-textColor:   var(--main-flag-textColor,   var(--base-flag-textColor));
+      --icon-unitInfo:    var(--main-icon-unitInfo,    var(--base-icon-unitInfo));
+      --flag-priceDrop:   var(--main-flag-priceDrop,   var(--base-flag-priceDrop));
+      --flag-priceRise:   var(--main-flag-priceRise,   var(--base-flag-priceRise));
+      --info-fadeColor:   var(--main-info-fadeColor,   var(--base-info-fadeColor));
+      --modal-coverColor: var(--main-modal-coverColor, var(--base-modal-coverColor));
     }
-    /* Assign overwrite colors for dark theme. */
-    /*   values not assigned here will use the defaults above, even in dark theme */
-    #dark-theme:checked ~ #theme-container {
-      --page-bgColor:     var(--dark-page-bgColor,     var(--base-page-bgColor));
-      --page-fgColor:     var(--dark-page-fgColor,     var(--base-page-fgColor));
-      --page-linkColor:   var(--dark-page-linkColor,   var(--base-page-linkColor));
-      --head-bgColor:     var(--dark-head-bgColor,     var(--base-head-bgColor));
-      --head-fgColor:     var(--dark-head-fgColor,     var(--base-head-fgColor));
-      --foot-bgColor:     var(--dark-foot-bgColor,     var(--base-foot-bgColor));
-      --foot-fgColor:     var(--dark-foot-fgColor,     var(--base-foot-fgColor));
-      --showcase-bgColor: var(--dark-showcase-bgColor, var(--base-showcase-bgColor));
-      --showcase-fgColor: var(--dark-showcase-fgColor, var(--base-showcase-fgColor));
-      --photo-bgColor:    var(--dark-photo-bgColor,    var(--base-photo-bgColor));
-      --flag-newList:     var(--dark-flag-newList,     var(--base-flag-newList));
-      --flag-ownerList:   var(--dark-flag-ownerList,   var(--base-flag-ownerList));
-      --flag-textColor:   var(--dark-flag-textColor,   var(--base-flag-textColor));
-      --icon-unitInfo:    var(--dark-icon-unitInfo,    var(--base-icon-unitInfo));
-      --flag-priceDrop:   var(--dark-flag-priceDrop,   var(--base-flag-priceDrop));
-      --flag-priceRise:   var(--dark-flag-priceRise,   var(--base-flag-priceRise));
-      --info-fadeColor:   var(--dark-info-fadeColor,   var(--base-info-fadeColor));
-      --modal-coverColor: var(--dark-modal-coverColor, var(--base-modal-coverColor));
+    /* Assign overwrite colors for alternate theme. */
+    /*   values not assigned here will use the defaults above */
+    #alt-theme:checked ~ #theme-container {
+      background-color: var(--alt-background);
+      color: var(--alt-foreground);
+      --page-bgColor:     var(--alt-page-bgColor,     var(--base-page-bgColor));
+      --page-fgColor:     var(--alt-page-fgColor,     var(--base-page-fgColor));
+      --page-linkColor:   var(--alt-page-linkColor,   var(--base-page-linkColor));
+      --head-bgColor:     var(--alt-head-bgColor,     var(--base-head-bgColor));
+      --head-fgColor:     var(--alt-head-fgColor,     var(--base-head-fgColor));
+      --foot-bgColor:     var(--alt-foot-bgColor,     var(--base-foot-bgColor));
+      --foot-fgColor:     var(--alt-foot-fgColor,     var(--base-foot-fgColor));
+      --showcase-bgColor: var(--alt-showcase-bgColor, var(--base-showcase-bgColor));
+      --showcase-fgColor: var(--alt-showcase-fgColor, var(--base-showcase-fgColor));
+      --photo-bgColor:    var(--alt-photo-bgColor,    var(--base-photo-bgColor));
+      --flag-newList:     var(--alt-flag-newList,     var(--base-flag-newList));
+      --flag-ownerList:   var(--alt-flag-ownerList,   var(--base-flag-ownerList));
+      --flag-textColor:   var(--alt-flag-textColor,   var(--base-flag-textColor));
+      --icon-unitInfo:    var(--alt-icon-unitInfo,    var(--base-icon-unitInfo));
+      --flag-priceDrop:   var(--alt-flag-priceDrop,   var(--base-flag-priceDrop));
+      --flag-priceRise:   var(--alt-flag-priceRise,   var(--base-flag-priceRise));
+      --info-fadeColor:   var(--alt-info-fadeColor,   var(--base-info-fadeColor));
+      --modal-coverColor: var(--alt-modal-coverColor, var(--base-modal-coverColor));
     }
     #theme-container {
       border: 0;
@@ -236,8 +299,12 @@
     #theme-lead {
       display: none;
     }
-    #dark-theme:checked ~ #theme-container #dark-switch,
-    #lite-theme:checked ~ #theme-container #lite-switch {
+    #alt-theme:checked ~ theme-container #alt-switch,
+    #main-theme:checked ~ theme-container #main-switch {
+      display: none;
+    }
+    #main-theme:checked ~ #theme-container #main-switch,
+    #alt-theme:checked ~ #theme-container #alt-switch {
       display: none;
     }
     #page-content {
@@ -603,8 +670,8 @@
   </style>
 </head>
 <body>
-  <input id="lite-theme" class="hidden-control" name="theme_switch" type="radio" value="lite_on" checked="true">
-  <input id="dark-theme" class="hidden-control" name="theme_switch" type="radio" value="dark_on">
+  <input id="main-theme" class="hidden-control" name="theme_switch" type="radio" value="main_on" checked="true">
+  <input id="alt-theme" class="hidden-control" name="theme_switch" type="radio" value="alt_on">
 <div id="theme-container">
   <input name="modal_state" type="radio" id="modal-x" value="modal x" class="hidden-control" checked="true">
   <input name="modal_state" type="radio" id="modal-1" value="modal 1" class="hidden-control modal-activate">
@@ -975,7 +1042,7 @@
           <div id="copyright">Copyright © 2018 Trulia, LLC. All rights reserved.</div>
           <div>Equal Housing Opportunity.</div>
         </section>
-        <div id="theme-control"><span id="theme-lead">Enable </span><label id="lite-switch" for="lite-theme">Light</label><label id="dark-switch" for="dark-theme">Dark</label>&nbsp;Mode</div>
+        <div id="theme-control"><span id="theme-lead">Enable </span><label id="main-switch" for="main-theme"><span id="main-lite">Light</span><span id="main-dark">Dark</span></label><label id="alt-switch" for="alt-theme"><span id="alt-lite">Dark</span><span id="alt-dark">Light</span></label>&nbsp;Mode</div>
       </section>
     </footer>
   </div>
