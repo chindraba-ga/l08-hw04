@@ -311,6 +311,12 @@
       display: grid;
       grid-template-columns: 100%;
     }
+    #content-header {
+      position: sticky;
+      top: 0;
+      background-color: var(--page-bgColor);
+      z-index: 1;
+    }
     #content-header div:first-child {
       padding: 20px 0;
       font-weight: bold;
@@ -636,6 +642,12 @@
       }
       #theme-lead {
         display: inline;
+      }
+      #content-header {
+        position: static;
+      }
+      #area-report-title {
+        position: static;
       }
     }
     @media screen AND (min-width: 43.2rem) {
