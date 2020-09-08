@@ -13,164 +13,484 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
   <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/symbola" type="text/css"/>
   <style>
-  /*  Build the theme color setup */
+  /*  Build the color scheme setup */
     /* This page supports both dark and light color schemes, dark by preference */
     #main-lite, #alt-lite {
       display: none;
     }
-    /* Assign default colors to variables for use in the CSS */
-    :root {
-      --default-background:    rgb(33,33,33);
-      --default-foreground:    rgba(251,251,251,.75);
-      --alt-background:        rgb(255,255,255);
-      --alt-foreground:        rgb(34,34,34);
-
-      --base-page-bgColor:     var(--default-background);
-      --base-page-fgColor:     rgba(236,236,236,.85);
-      --base-page-linkColor:   rgba(231,144,60,1);
-      --base-head-bgColor:     rgba(50,182,76,1);
-      --base-head-fgColor:     rgba(255,255,255,1);
-      --base-foot-bgColor:     rgba(53,60,59,1);
-      --base-foot-fgColor:     rgba(177,182,187,.5);
-      --base-showcase-bgColor: rgba(0,0,0,.85);
-      --base-showcase-fgColor: var(--base-page-fgColor);
-      --base-photo-bgColor:    rgba(0,0,0,.55);
-      --base-flag-newList:     rgba(145,217,165,.85);
-      --base-flag-ownerList:   rgba(187,189,191,.45);
-      --base-flag-textColor:   rgba(255,255,255,.85);
-      --base-icon-unitInfo:    rgba(145,217,165,.85);
-      --base-flag-priceDrop:   rgba(158,224,149,1);
-      --base-flag-priceRise:   rgba(255,54,26,1);
-      --base-info-fadeColor:   rgba(192,197,199,.85);
-      --base-modal-coverColor: rgba(0,0,0,.55);
+    :root { /* Ultimate fallback colors for the default color scheme  -default-base- */
+      --default-base-main-brandMainColor:       rgb(50,182,76);
+      --default-base-main-brandAltColor:        rgb(255,255,255);
+      --default-base-main-page-bgColor:         rgb(18,18,18);
+      --default-base-main-page-fgColor:         rgba(236,236,236,.85);
+      --default-base-main-page-fadeColor:       rgb(192,197,199);
+      --default-base-main-page-linkColor:       rgb(231,144,60);
+      --default-base-main-foot-bgColor:         rgb(53,60,59);
+      --default-base-main-foot-fgColor:         rgba(177,182,187,.5);
+      --default-base-main-flag-textColor:       rgba(255,255,255,.85);
+      --default-base-main-flag-newList:         rgba(145,217,165,.85);
+      --default-base-main-flag-ownerList:       rgba(187,189,191,.45);
+      --default-base-main-flag-priceDrop:       rgb(158,224,149);
+      --default-base-main-flag-priceRise:       rgb(255,54,26);
+      --default-base-main-icon-unitInfo:        rgba(145,217,165,.85);
+      --default-base-main-photo-blendColor:     rgba(0,0,0,.55);
+      --default-base-main-modal-coverColor:     rgba(0,0,0,.55);
+      --default-base-main-showcase-gutterColor: rgba(0,0,0,.85);
     }
-    /* Assign the colors to variables based on theme */
-    /*                  Light theme                  */
+    :root { /* Dark mode overrides for the default color scheme */
+    /* Entries here will override the --default-base-main-* entries above for dark mode */
+      --default-base-dark-page-fadeColor:   rgba(192,197,199,.85);
+    }
+    :root { /* Lite mode overrides for the default color scheme */
+    /* Entries here will override the --default-base-main-* entries above for lite mode */
+      --default-base-lite-page-bgColor:         rgb(250,250,250);
+      --default-base-lite-page-fgColor:         rgb(34,34,34);
+      --default-base-lite-page-fadeColor:       rgb(120,125,129);
+      --default-base-lite-page-linkColor:       rgb(0,128,0);
+      --default-base-lite-flag-textColor:       rgba(255,255,255,.95);
+      --default-base-lite-flag-newList:         rgba(45,191,102,.70);
+      --default-base-lite-flag-ownerList:       rgba(134,144,152,.45);
+      --default-base-lite-flag-priceDrop:       rgba(0,176,0);
+      --default-base-lite-flag-priceRise:       rgba(215,0,0);
+      --default-base-lite-icon-unitInfo:        rgb(0,0,192);
+      --default-base-lite-photo-blendColor:     rgba(255,255,255,.95);
+      --default-base-lite-modal-coverColor:     rgba(255,255,255,.05);
+      --default-base-lite-showcase-gutterColor: rgb(227,228,230);
+    }
     :root {
-      --alt-page-bgColor:     rgba(255,255,255,1);
-      --alt-page-fgColor:     rgba(32,32,32,1);
-      --alt-page-linkColor:   rgba(0,128,0,1);
-      --alt-head-bgColor:     rgba(50,182,76,1);
-      --alt-head-fgColor:     rgba(255,255,255,1);
-      --alt-foot-bgColor:     rgba(71,78,82);
-      --alt-foot-fgColor:     rgba(177,182,187,.5);
-      --alt-showcase-bgColor: rgba(227,228,230,1);
-      --alt-showcase-fgColor: rgba(32,32,32,1);
-      --alt-photo-bgColor:    rgba(255,255,255,.95);
-      --alt-flag-newList:     rgba(45,191,102,.70);
-      --alt-flag-ownerList:   rgba(134,144,152,.45);
-      --alt-flag-textColor:   rgba(255,255,255,.95);
-      --alt-icon-unitInfo:    rgba(0,0,192,1);
-      --alt-flag-priceDrop:   rgba(0,176,0);
-      --alt-flag-priceRise:   rgba(215,0,0);
-      --alt-info-fadeColor:   rgba(0,0,0,.65);
-      --alt-modal-coverColor: rgba(255,255,255,.05);
+      --default-dark-brandMainColor:       var( --default-base-dark-brandMainColor,       var( --default-base-main-brandMainColor));
+      --default-dark-brandAltColor:        var( --default-base-dark-brandAltColor,        var( --default-base-main-brandAltColor));
+      --default-dark-page-bgColor:         var( --default-base-dark-page-bgColor,         var( --default-base-main-page-bgColor));
+      --default-dark-page-fgColor:         var( --default-base-dark-page-fgColor,         var( --default-base-main-page-fgColor));
+      --default-dark-page-fadeColor:       var( --default-base-dark-page-fadeColor,       var( --default-base-main-page-fadeColor));
+      --default-dark-page-linkColor:       var( --default-base-dark-page-linkColor,       var( --default-base-main-page-linkColor));
+      --default-dark-foot-bgColor:         var( --default-base-dark-foot-bgColor,         var( --default-base-main-foot-bgColor));
+      --default-dark-foot-fgColor:         var( --default-base-dark-foot-fgColor,         var( --default-base-main-foot-fgColor));
+      --default-dark-flag-textColor:       var( --default-base-dark-flag-textColor,       var( --default-base-main-flag-textColor));
+      --default-dark-flag-newList:         var( --default-base-dark-flag-newList,         var( --default-base-main-flag-newList));
+      --default-dark-flag-ownerList:       var( --default-base-dark-flag-ownerList,       var( --default-base-main-flag-ownerList));
+      --default-dark-flag-priceDrop:       var( --default-base-dark-flag-priceDrop,       var( --default-base-main-flag-priceDrop));
+      --default-dark-flag-priceRise:       var( --default-base-dark-flag-priceRise,       var( --default-base-main-flag-priceRise));
+      --default-dark-icon-unitInfo:        var( --default-base-dark-icon-unitInfo,        var( --default-base-main-icon-unitInfo));
+      --default-dark-photo-blendColor:     var( --default-base-dark-photo-blendColor,     var( --default-base-main-photo-blendColor));
+      --default-dark-modal-coverColor:     var( --default-base-dark-modal-coverColor,     var( --default-base-main-modal-coverColor));
+      --default-dark-showcase-gutterColor: var( --default-base-dark-showcase-gutterColor, var( --default-base-main-showcase-gutterColor));
+
+      --default-lite-brandMainColor:       var( --default-base-lite-brandMainColor,       var( --default-base-main-brandMainColor));
+      --default-lite-brandAltColor:        var( --default-base-lite-brandAltColor,        var( --default-base-main-brandAltColor));
+      --default-lite-page-bgColor:         var( --default-base-lite-page-bgColor,         var( --default-base-main-page-bgColor));
+      --default-lite-page-fgColor:         var( --default-base-lite-page-fgColor,         var( --default-base-main-page-fgColor));
+      --default-lite-page-fadeColor:       var( --default-base-lite-page-fadeColor,       var( --default-base-main-page-fadeColor));
+      --default-lite-page-linkColor:       var( --default-base-lite-page-linkColor,       var( --default-base-main-page-linkColor));
+      --default-lite-foot-bgColor:         var( --default-base-lite-foot-bgColor,         var( --default-base-main-foot-bgColor));
+      --default-lite-foot-fgColor:         var( --default-base-lite-foot-fgColor,         var( --default-base-main-foot-fgColor));
+      --default-lite-flag-textColor:       var( --default-base-lite-flag-textColor,       var( --default-base-main-flag-textColor));
+      --default-lite-flag-newList:         var( --default-base-lite-flag-newList,         var( --default-base-main-flag-newList));
+      --default-lite-flag-ownerList:       var( --default-base-lite-flag-ownerList,       var( --default-base-main-flag-ownerList));
+      --default-lite-flag-priceDrop:       var( --default-base-lite-flag-priceDrop,       var( --default-base-main-flag-priceDrop));
+      --default-lite-flag-priceRise:       var( --default-base-lite-flag-priceRise,       var( --default-base-main-flag-priceRise));
+      --default-lite-icon-unitInfo:        var( --default-base-lite-icon-unitInfo,        var( --default-base-main-icon-unitInfo));
+      --default-lite-photo-blendColor:     var( --default-base-lite-photo-blendColor,     var( --default-base-main-photo-blendColor));
+      --default-lite-modal-coverColor:     var( --default-base-lite-modal-coverColor,     var( --default-base-main-modal-coverColor));
+      --default-lite-showcase-gutterColor: var( --default-base-lite-showcase-gutterColor, var( --default-base-main-showcase-gutterColor));
+    }
+    @media not all and (prefers-color-scheme: light) {
+      #main-mode:checked ~ #default-scheme:checked ~ #scheme-container { /* Load the default scheme */
+        --colors-brandMainColor:       var( --default-dark-brandMainColor);
+        --colors-brandAltColor:        var( --default-dark-brandAltColor);
+        --colors-page-bgColor:         var( --default-dark-page-bgColor);
+        --colors-page-fgColor:         var( --default-dark-page-fgColor);
+        --colors-page-fadeColor:       var( --default-dark-page-fadeColor);
+        --colors-page-linkColor:       var( --default-dark-page-linkColor);
+        --colors-foot-bgColor:         var( --default-dark-foot-bgColor);
+        --colors-foot-fgColor:         var( --default-dark-foot-fgColor);
+        --colors-flag-textColor:       var( --default-dark-flag-textColor);
+        --colors-flag-newList:         var( --default-dark-flag-newList);
+        --colors-flag-ownerList:       var( --default-dark-flag-ownerList);
+        --colors-flag-priceDrop:       var( --default-dark-flag-priceDrop);
+        --colors-flag-priceRise:       var( --default-dark-flag-priceRise);
+        --colors-icon-unitInfo:        var( --default-dark-icon-unitInfo);
+        --colors-photo-blendColor:     var( --default-dark-photo-blendColor);
+        --colors-modal-coverColor:     var( --default-dark-modal-coverColor);
+        --colors-showcase-gutterColor: var( --default-dark-showcase-gutterColor);
+      }
+      #alt-mode:checked ~ #default-scheme:checked ~ #scheme-container { /* Load the default scheme */
+        --colors-brandMainColor:       var( --default-lite-brandMainColor);
+        --colors-brandAltColor:        var( --default-lite-brandAltColor);
+        --colors-page-bgColor:         var( --default-lite-page-bgColor);
+        --colors-page-fgColor:         var( --default-lite-page-fgColor);
+        --colors-page-fadeColor:       var( --default-lite-page-fadeColor);
+        --colors-page-linkColor:       var( --default-lite-page-linkColor);
+        --colors-foot-bgColor:         var( --default-lite-foot-bgColor);
+        --colors-foot-fgColor:         var( --default-lite-foot-fgColor);
+        --colors-flag-textColor:       var( --default-lite-flag-textColor);
+        --colors-flag-newList:         var( --default-lite-flag-newList);
+        --colors-flag-ownerList:       var( --default-lite-flag-ownerList);
+        --colors-flag-priceDrop:       var( --default-lite-flag-priceDrop);
+        --colors-flag-priceRise:       var( --default-lite-flag-priceRise);
+        --colors-icon-unitInfo:        var( --default-lite-icon-unitInfo);
+        --colors-photo-blendColor:     var( --default-lite-photo-blendColor);
+        --colors-modal-coverColor:     var( --default-lite-modal-coverColor);
+        --colors-showcase-gutterColor: var( --default-lite-showcase-gutterColor);
+      }
     }
     @media (prefers-color-scheme: light) {
-      #main-dark, #alt-dark {
-        display: none;
+      #main-mode:checked ~ #default-scheme:checked ~ #scheme-container { /* Load the default scheme */
+        --colors-brandMainColor:       var( --default-lite-brandMainColor);
+        --colors-brandAltColor:        var( --default-lite-brandAltColor);
+        --colors-page-bgColor:         var( --default-lite-page-bgColor);
+        --colors-page-fgColor:         var( --default-lite-page-fgColor);
+        --colors-page-fadeColor:       var( --default-lite-page-fadeColor);
+        --colors-page-linkColor:       var( --default-lite-page-linkColor);
+        --colors-foot-bgColor:         var( --default-lite-foot-bgColor);
+        --colors-foot-fgColor:         var( --default-lite-foot-fgColor);
+        --colors-flag-textColor:       var( --default-lite-flag-textColor);
+        --colors-flag-newList:         var( --default-lite-flag-newList);
+        --colors-flag-ownerList:       var( --default-lite-flag-ownerList);
+        --colors-flag-priceDrop:       var( --default-lite-flag-priceDrop);
+        --colors-flag-priceRise:       var( --default-lite-flag-priceRise);
+        --colors-icon-unitInfo:        var( --default-lite-icon-unitInfo);
+        --colors-photo-blendColor:     var( --default-lite-photo-blendColor);
+        --colors-modal-coverColor:     var( --default-lite-modal-coverColor);
+        --colors-showcase-gutterColor: var( --default-lite-showcase-gutterColor);
       }
-      #main-lite, #alt-lite {
-        display: inline;
+      #alt-mode:checked ~ #default-scheme:checked ~ #scheme-container { /* Load the default scheme */
+        --colors-brandMainColor:       var( --default-dark-brandMainColor);
+        --colors-brandAltColor:        var( --default-dark-brandAltColor);
+        --colors-page-bgColor:         var( --default-dark-page-bgColor);
+        --colors-page-fgColor:         var( --default-dark-page-fgColor);
+        --colors-page-fadeColor:       var( --default-dark-page-fadeColor);
+        --colors-page-linkColor:       var( --default-dark-page-linkColor);
+        --colors-foot-bgColor:         var( --default-dark-foot-bgColor);
+        --colors-foot-fgColor:         var( --default-dark-foot-fgColor);
+        --colors-flag-textColor:       var( --default-dark-flag-textColor);
+        --colors-flag-newList:         var( --default-dark-flag-newList);
+        --colors-flag-ownerList:       var( --default-dark-flag-ownerList);
+        --colors-flag-priceDrop:       var( --default-dark-flag-priceDrop);
+        --colors-flag-priceRise:       var( --default-dark-flag-priceRise);
+        --colors-icon-unitInfo:        var( --default-dark-icon-unitInfo);
+        --colors-photo-blendColor:     var( --default-dark-photo-blendColor);
+        --colors-modal-coverColor:     var( --default-dark-modal-coverColor);
+        --colors-showcase-gutterColor: var( --default-dark-showcase-gutterColor);
       }
-      /* Assign default colors to variables for use in the CSS */
-      :root {
-        --default-background:    rgb(255,255,255);
-        --default-foreground:    rgb(34,34,34);
-        --alt-background:        rgb(33,33,33);
-        --alt-foreground:        rgba(251,251,251,.75);
+    }
+    :root { /* Ultimate fallback colors for the default color scheme */
+      --retro-base-main-brandMainColor:       rgb(50,182,76);
+      --retro-base-main-brandAltColor:        rgb(255,255,255);
+      --retro-base-main-page-bgColor:         rgb(18,18,18);
+      --retro-base-main-page-fgColor:         green;
+      --retro-base-main-page-fadeColor:       rgb(192,197,199);
+      --retro-base-main-page-linkColor:       rgb(231,144,60);
+      --retro-base-main-foot-bgColor:         rgb(53,60,59);
+      --retro-base-main-foot-fgColor:         rgba(177,182,187,.5);
+      --retro-base-main-flag-textColor:       rgba(255,255,255,.85);
+      --retro-base-main-flag-newList:         rgba(145,217,165,.85);
+      --retro-base-main-flag-ownerList:       rgba(187,189,191,.45);
+      --retro-base-main-flag-priceDrop:       rgb(158,224,149);
+      --retro-base-main-flag-priceRise:       rgb(255,54,26);
+      --retro-base-main-icon-unitInfo:        rgba(145,217,165,.85);
+      --retro-base-main-photo-blendColor:     rgba(0,0,0,.55);
+      --retro-base-main-modal-coverColor:     rgba(0,0,0,.55);
+      --retro-base-main-showcase-gutterColor: rgba(0,0,0,.85);
+    }
+    :root { /* Dark mode overrides for the default color scheme */
+    /* Entries here will override the --retro-base-main-* entries above for dark mode */
+      --retro-base-dark-page-fadeColor:   rgba(192,197,199,.85);
+    }
+    :root { /* Lite mode overrides for the default color scheme */
+    /* Entries here will override the --retro-base-main-* entries above for lite mode */
+      --retro-base-lite-page-bgColor:         rgb(250,250,250);
+      --retro-base-lite-page-fgColor:         gold;
+      --retro-base-lite-page-fadeColor:       rgb(120,125,129);
+      --retro-base-lite-page-linkColor:       rgb(0,128,0);
+      --retro-base-lite-flag-textColor:       rgba(255,255,255,.95);
+      --retro-base-lite-flag-newList:         rgba(45,191,102,.70);
+      --retro-base-lite-flag-ownerList:       rgba(134,144,152,.45);
+      --retro-base-lite-flag-priceDrop:       rgba(0,176,0);
+      --retro-base-lite-flag-priceRise:       rgba(215,0,0);
+      --retro-base-lite-icon-unitInfo:        rgb(0,0,192);
+      --retro-base-lite-photo-blendColor:     rgba(255,255,255,.95);
+      --retro-base-lite-modal-coverColor:     rgba(255,255,255,.05);
+      --retro-base-lite-showcase-gutterColor: rgb(227,228,230);
+    }
+    :root {
+      --retro-dark-brandMainColor:       var( --retro-base-dark-brandMainColor,       var( --retro-base-main-brandMainColor,       var( --default-dark-brandMainColor)));
+      --retro-dark-brandAltColor:        var( --retro-base-dark-brandAltColor,        var( --retro-base-main-brandAltColor,        var( --default-dark-brandAltColor)));
+      --retro-dark-page-bgColor:         var( --retro-base-dark-page-bgColor,         var( --retro-base-main-page-bgColor,         var( --default-dark-page-bgColor)));
+      --retro-dark-page-fgColor:         var( --retro-base-dark-page-fgColor,         var( --retro-base-main-page-fgColor,         var( --default-dark-page-fgColor)));
+      --retro-dark-page-fadeColor:       var( --retro-base-dark-page-fadeColor,       var( --retro-base-main-page-fadeColor,       var( --default-dark-page-fadeColor)));
+      --retro-dark-page-linkColor:       var( --retro-base-dark-page-linkColor,       var( --retro-base-main-page-linkColor,       var( --default-dark-page-linkColor)));
+      --retro-dark-foot-bgColor:         var( --retro-base-dark-foot-bgColor,         var( --retro-base-main-foot-bgColor,         var( --default-dark-foot-bgColor)));
+      --retro-dark-foot-fgColor:         var( --retro-base-dark-foot-fgColor,         var( --retro-base-main-foot-fgColor,         var( --default-dark-foot-fgColor)));
+      --retro-dark-flag-textColor:       var( --retro-base-dark-flag-textColor,       var( --retro-base-main-flag-textColor,       var( --default-dark-flag-textColor)));
+      --retro-dark-flag-newList:         var( --retro-base-dark-flag-newList,         var( --retro-base-main-flag-newList,         var( --default-dark-flag-newList)));
+      --retro-dark-flag-ownerList:       var( --retro-base-dark-flag-ownerList,       var( --retro-base-main-flag-ownerList,       var( --default-dark-flag-ownerList)));
+      --retro-dark-flag-priceDrop:       var( --retro-base-dark-flag-priceDrop,       var( --retro-base-main-flag-priceDrop,       var( --default-dark-flag-priceDrop)));
+      --retro-dark-flag-priceRise:       var( --retro-base-dark-flag-priceRise,       var( --retro-base-main-flag-priceRise,       var( --default-dark-flag-priceRise)));
+      --retro-dark-icon-unitInfo:        var( --retro-base-dark-icon-unitInfo,        var( --retro-base-main-icon-unitInfo,        var( --default-dark-icon-unitInfo)));
+      --retro-dark-photo-blendColor:     var( --retro-base-dark-photo-blendColor,     var( --retro-base-main-photo-blendColor,     var( --default-dark-photo-blendColor)));
+      --retro-dark-modal-coverColor:     var( --retro-base-dark-modal-coverColor,     var( --retro-base-main-modal-coverColor,     var( --default-dark-modal-coverColor)));
+      --retro-dark-showcase-gutterColor: var( --retro-base-dark-showcase-gutterColor, var( --retro-base-main-showcase-gutterColor, var( --default-dark-showcase-gutterColor)));
+                                                                                          
+      --retro-lite-brandMainColor:       var( --retro-base-lite-brandMainColor,       var( --retro-base-main-brandMainColor,       var( --default-lite-brandMainColor)));
+      --retro-lite-brandAltColor:        var( --retro-base-lite-brandAltColor,        var( --retro-base-main-brandAltColor,        var( --default-lite-brandAltColor)));
+      --retro-lite-page-bgColor:         var( --retro-base-lite-page-bgColor,         var( --retro-base-main-page-bgColor,         var( --default-lite-page-bgColor)));
+      --retro-lite-page-fgColor:         var( --retro-base-lite-page-fgColor,         var( --retro-base-main-page-fgColor,         var( --default-lite-page-fgColor)));
+      --retro-lite-page-fadeColor:       var( --retro-base-lite-page-fadeColor,       var( --retro-base-main-page-fadeColor,       var( --default-lite-page-fadeColor)));
+      --retro-lite-page-linkColor:       var( --retro-base-lite-page-linkColor,       var( --retro-base-main-page-linkColor,       var( --default-lite-page-linkColor)));
+      --retro-lite-foot-bgColor:         var( --retro-base-lite-foot-bgColor,         var( --retro-base-main-foot-bgColor,         var( --default-lite-foot-bgColor)));
+      --retro-lite-foot-fgColor:         var( --retro-base-lite-foot-fgColor,         var( --retro-base-main-foot-fgColor,         var( --default-lite-foot-fgColor)));
+      --retro-lite-flag-textColor:       var( --retro-base-lite-flag-textColor,       var( --retro-base-main-flag-textColor,       var( --default-lite-flag-textColor)));
+      --retro-lite-flag-newList:         var( --retro-base-lite-flag-newList,         var( --retro-base-main-flag-newList,         var( --default-lite-flag-newList)));
+      --retro-lite-flag-ownerList:       var( --retro-base-lite-flag-ownerList,       var( --retro-base-main-flag-ownerList,       var( --default-lite-flag-ownerList)));
+      --retro-lite-flag-priceDrop:       var( --retro-base-lite-flag-priceDrop,       var( --retro-base-main-flag-priceDrop,       var( --default-lite-flag-priceDrop)));
+      --retro-lite-flag-priceRise:       var( --retro-base-lite-flag-priceRise,       var( --retro-base-main-flag-priceRise,       var( --default-lite-flag-priceRise)));
+      --retro-lite-icon-unitInfo:        var( --retro-base-lite-icon-unitInfo,        var( --retro-base-main-icon-unitInfo,        var( --default-lite-icon-unitInfo)));
+      --retro-lite-photo-blendColor:     var( --retro-base-lite-photo-blendColor,     var( --retro-base-main-photo-blendColor,     var( --default-lite-photo-blendColor)));
+      --retro-lite-modal-coverColor:     var( --retro-base-lite-modal-coverColor,     var( --retro-base-main-modal-coverColor,     var( --default-lite-modal-coverColor)));
+      --retro-lite-showcase-gutterColor: var( --retro-base-lite-showcase-gutterColor, var( --retro-base-main-showcase-gutterColor, var( --default-lite-showcase-gutterColor)));
+    }
+    @media not all and (prefers-color-scheme: light) {
+      #main-mode:checked ~ #retro-scheme:checked ~ #scheme-container { /* Load the default scheme */
+        --colors-brandMainColor:       var( --retro-dark-brandMainColor);
+        --colors-brandAltColor:        var( --retro-dark-brandAltColor);
+        --colors-page-bgColor:         var( --retro-dark-page-bgColor);
+        --colors-page-fgColor:         var( --retro-dark-page-fgColor);
+        --colors-page-fadeColor:       var( --retro-dark-page-fadeColor);
+        --colors-page-linkColor:       var( --retro-dark-page-linkColor);
+        --colors-foot-bgColor:         var( --retro-dark-foot-bgColor);
+        --colors-foot-fgColor:         var( --retro-dark-foot-fgColor);
+        --colors-flag-textColor:       var( --retro-dark-flag-textColor);
+        --colors-flag-newList:         var( --retro-dark-flag-newList);
+        --colors-flag-ownerList:       var( --retro-dark-flag-ownerList);
+        --colors-flag-priceDrop:       var( --retro-dark-flag-priceDrop);
+        --colors-flag-priceRise:       var( --retro-dark-flag-priceRise);
+        --colors-icon-unitInfo:        var( --retro-dark-icon-unitInfo);
+        --colors-photo-blendColor:     var( --retro-dark-photo-blendColor);
+        --colors-modal-coverColor:     var( --retro-dark-modal-coverColor);
+        --colors-showcase-gutterColor: var( --retro-dark-showcase-gutterColor);
+      }
+      #alt-mode:checked ~ #retro-scheme:checked ~ #scheme-container { /* Load the default scheme */
+        --colors-brandMainColor:       var( --retro-lite-brandMainColor);
+        --colors-brandAltColor:        var( --retro-lite-brandAltColor);
+        --colors-page-bgColor:         var( --retro-lite-page-bgColor);
+        --colors-page-fgColor:         var( --retro-lite-page-fgColor);
+        --colors-page-fadeColor:       var( --retro-lite-page-fadeColor);
+        --colors-page-linkColor:       var( --retro-lite-page-linkColor);
+        --colors-foot-bgColor:         var( --retro-lite-foot-bgColor);
+        --colors-foot-fgColor:         var( --retro-lite-foot-fgColor);
+        --colors-flag-textColor:       var( --retro-lite-flag-textColor);
+        --colors-flag-newList:         var( --retro-lite-flag-newList);
+        --colors-flag-ownerList:       var( --retro-lite-flag-ownerList);
+        --colors-flag-priceDrop:       var( --retro-lite-flag-priceDrop);
+        --colors-flag-priceRise:       var( --retro-lite-flag-priceRise);
+        --colors-icon-unitInfo:        var( --retro-lite-icon-unitInfo);
+        --colors-photo-blendColor:     var( --retro-lite-photo-blendColor);
+        --colors-modal-coverColor:     var( --retro-lite-modal-coverColor);
+        --colors-showcase-gutterColor: var( --retro-lite-showcase-gutterColor);
+      }
+    }
+    @media (prefers-color-scheme: light) {
+      #main-mode:checked ~ #retro-scheme:checked ~ #scheme-container { /* Load the default scheme */
+        --colors-brandMainColor:       var( --retro-lite-brandMainColor);
+        --colors-brandAltColor:        var( --retro-lite-brandAltColor);
+        --colors-page-bgColor:         var( --retro-lite-page-bgColor);
+        --colors-page-fgColor:         var( --retro-lite-page-fgColor);
+        --colors-page-fadeColor:       var( --retro-lite-page-fadeColor);
+        --colors-page-linkColor:       var( --retro-lite-page-linkColor);
+        --colors-foot-bgColor:         var( --retro-lite-foot-bgColor);
+        --colors-foot-fgColor:         var( --retro-lite-foot-fgColor);
+        --colors-flag-textColor:       var( --retro-lite-flag-textColor);
+        --colors-flag-newList:         var( --retro-lite-flag-newList);
+        --colors-flag-ownerList:       var( --retro-lite-flag-ownerList);
+        --colors-flag-priceDrop:       var( --retro-lite-flag-priceDrop);
+        --colors-flag-priceRise:       var( --retro-lite-flag-priceRise);
+        --colors-icon-unitInfo:        var( --retro-lite-icon-unitInfo);
+        --colors-photo-blendColor:     var( --retro-lite-photo-blendColor);
+        --colors-modal-coverColor:     var( --retro-lite-modal-coverColor);
+        --colors-showcase-gutterColor: var( --retro-lite-showcase-gutterColor);
+      }
+      #alt-mode:checked ~ #retro-scheme:checked ~ #scheme-container { /* Load the default scheme */
+        --colors-brandMainColor:       var( --retro-dark-brandMainColor);
+        --colors-brandAltColor:        var( --retro-dark-brandAltColor);
+        --colors-page-bgColor:         var( --retro-dark-page-bgColor);
+        --colors-page-fgColor:         var( --retro-dark-page-fgColor);
+        --colors-page-fadeColor:       var( --retro-dark-page-fadeColor);
+        --colors-page-linkColor:       var( --retro-dark-page-linkColor);
+        --colors-foot-bgColor:         var( --retro-dark-foot-bgColor);
+        --colors-foot-fgColor:         var( --retro-dark-foot-fgColor);
+        --colors-flag-textColor:       var( --retro-dark-flag-textColor);
+        --colors-flag-newList:         var( --retro-dark-flag-newList);
+        --colors-flag-ownerList:       var( --retro-dark-flag-ownerList);
+        --colors-flag-priceDrop:       var( --retro-dark-flag-priceDrop);
+        --colors-flag-priceRise:       var( --retro-dark-flag-priceRise);
+        --colors-icon-unitInfo:        var( --retro-dark-icon-unitInfo);
+        --colors-photo-blendColor:     var( --retro-dark-photo-blendColor);
+        --colors-modal-coverColor:     var( --retro-dark-modal-coverColor);
+        --colors-showcase-gutterColor: var( --retro-dark-showcase-gutterColor);
+      }
+    }
+    :root { /* Ultimate fallback colors for the default color scheme */
+      --purple-base-main-brandMainColor:       rgb(50,182,76);
+      --purple-base-main-brandAltColor:        rgb(255,255,255);
+      --purple-base-main-page-bgColor:         rgb(18,18,18);
+      --purple-base-main-page-fgColor:         rebeccapurple;
+      --purple-base-main-page-fadeColor:       rgb(192,197,199);
+      --purple-base-main-page-linkColor:       rgb(231,144,60);
+      --purple-base-main-foot-bgColor:         rgb(53,60,59);
+      --purple-base-main-foot-fgColor:         rgba(177,182,187,.5);
+      --purple-base-main-flag-textColor:       rgba(255,255,255,.85);
+      --purple-base-main-flag-newList:         rgba(145,217,165,.85);
+      --purple-base-main-flag-ownerList:       rgba(187,189,191,.45);
+      --purple-base-main-flag-priceDrop:       rgb(158,224,149);
+      --purple-base-main-flag-priceRise:       rgb(255,54,26);
+      --purple-base-main-icon-unitInfo:        rgba(145,217,165,.85);
+      --purple-base-main-photo-blendColor:     rgba(0,0,0,.55);
+      --purple-base-main-modal-coverColor:     rgba(0,0,0,.55);
+      --purple-base-main-showcase-gutterColor: rgba(0,0,0,.85);
+    }
+    :root { /* Dark mode overrides for the default color scheme */
+    /* Entries here will override the --purple-base-main-* entries above for dark mode */
+      --purple-base-dark-page-fadeColor:   rgba(192,197,199,.85);
+    }
+    :root { /* Lite mode overrides for the default color scheme */
+    /* Entries here will override the --purple-base-main-* entries above for lite mode */
+      --purple-base-lite-page-bgColor:         rgb(250,250,250);
+      --purple-base-lite-page-fgColor:         firebrick;
+      --purple-base-lite-page-fadeColor:       rgb(120,125,129);
+      --purple-base-lite-page-linkColor:       rgb(0,128,0);
+      --purple-base-lite-flag-textColor:       rgba(255,255,255,.95);
+      --purple-base-lite-flag-newList:         rgba(45,191,102,.70);
+      --purple-base-lite-flag-ownerList:       rgba(134,144,152,.45);
+      --purple-base-lite-flag-priceDrop:       rgba(0,176,0);
+      --purple-base-lite-flag-priceRise:       rgba(215,0,0);
+      --purple-base-lite-icon-unitInfo:        rgb(0,0,192);
+      --purple-base-lite-photo-blendColor:     rgba(255,255,255,.95);
+      --purple-base-lite-modal-coverColor:     rgba(255,255,255,.05);
+      --purple-base-lite-showcase-gutterColor: rgb(227,228,230);
+    }
+    :root {
+      --purple-dark-brandMainColor:       var( --purple-base-dark-brandMainColor,       var( --purple-base-main-brandMainColor,       var( --default-dark-brandMainColor)));
+      --purple-dark-brandAltColor:        var( --purple-base-dark-brandAltColor,        var( --purple-base-main-brandAltColor,        var( --default-dark-brandAltColor)));
+      --purple-dark-page-bgColor:         var( --purple-base-dark-page-bgColor,         var( --purple-base-main-page-bgColor,         var( --default-dark-page-bgColor)));
+      --purple-dark-page-fgColor:         var( --purple-base-dark-page-fgColor,         var( --purple-base-main-page-fgColor,         var( --default-dark-page-fgColor)));
+      --purple-dark-page-fadeColor:       var( --purple-base-dark-page-fadeColor,       var( --purple-base-main-page-fadeColor,       var( --default-dark-page-fadeColor)));
+      --purple-dark-page-linkColor:       var( --purple-base-dark-page-linkColor,       var( --purple-base-main-page-linkColor,       var( --default-dark-page-linkColor)));
+      --purple-dark-foot-bgColor:         var( --purple-base-dark-foot-bgColor,         var( --purple-base-main-foot-bgColor,         var( --default-dark-foot-bgColor)));
+      --purple-dark-foot-fgColor:         var( --purple-base-dark-foot-fgColor,         var( --purple-base-main-foot-fgColor,         var( --default-dark-foot-fgColor)));
+      --purple-dark-flag-textColor:       var( --purple-base-dark-flag-textColor,       var( --purple-base-main-flag-textColor,       var( --default-dark-flag-textColor)));
+      --purple-dark-flag-newList:         var( --purple-base-dark-flag-newList,         var( --purple-base-main-flag-newList,         var( --default-dark-flag-newList)));
+      --purple-dark-flag-ownerList:       var( --purple-base-dark-flag-ownerList,       var( --purple-base-main-flag-ownerList,       var( --default-dark-flag-ownerList)));
+      --purple-dark-flag-priceDrop:       var( --purple-base-dark-flag-priceDrop,       var( --purple-base-main-flag-priceDrop,       var( --default-dark-flag-priceDrop)));
+      --purple-dark-flag-priceRise:       var( --purple-base-dark-flag-priceRise,       var( --purple-base-main-flag-priceRise,       var( --default-dark-flag-priceRise)));
+      --purple-dark-icon-unitInfo:        var( --purple-base-dark-icon-unitInfo,        var( --purple-base-main-icon-unitInfo,        var( --default-dark-icon-unitInfo)));
+      --purple-dark-photo-blendColor:     var( --purple-base-dark-photo-blendColor,     var( --purple-base-main-photo-blendColor,     var( --default-dark-photo-blendColor)));
+      --purple-dark-modal-coverColor:     var( --purple-base-dark-modal-coverColor,     var( --purple-base-main-modal-coverColor,     var( --default-dark-modal-coverColor)));
+      --purple-dark-showcase-gutterColor: var( --purple-base-dark-showcase-gutterColor, var( --purple-base-main-showcase-gutterColor, var( --default-dark-showcase-gutterColor)));
+                                                                                          
+      --purple-lite-brandMainColor:       var( --purple-base-lite-brandMainColor,       var( --purple-base-main-brandMainColor,       var( --default-lite-brandMainColor)));
+      --purple-lite-brandAltColor:        var( --purple-base-lite-brandAltColor,        var( --purple-base-main-brandAltColor,        var( --default-lite-brandAltColor)));
+      --purple-lite-page-bgColor:         var( --purple-base-lite-page-bgColor,         var( --purple-base-main-page-bgColor,         var( --default-lite-page-bgColor)));
+      --purple-lite-page-fgColor:         var( --purple-base-lite-page-fgColor,         var( --purple-base-main-page-fgColor,         var( --default-lite-page-fgColor)));
+      --purple-lite-page-fadeColor:       var( --purple-base-lite-page-fadeColor,       var( --purple-base-main-page-fadeColor,       var( --default-lite-page-fadeColor)));
+      --purple-lite-page-linkColor:       var( --purple-base-lite-page-linkColor,       var( --purple-base-main-page-linkColor,       var( --default-lite-page-linkColor)));
+      --purple-lite-foot-bgColor:         var( --purple-base-lite-foot-bgColor,         var( --purple-base-main-foot-bgColor,         var( --default-lite-foot-bgColor)));
+      --purple-lite-foot-fgColor:         var( --purple-base-lite-foot-fgColor,         var( --purple-base-main-foot-fgColor,         var( --default-lite-foot-fgColor)));
+      --purple-lite-flag-textColor:       var( --purple-base-lite-flag-textColor,       var( --purple-base-main-flag-textColor,       var( --default-lite-flag-textColor)));
+      --purple-lite-flag-newList:         var( --purple-base-lite-flag-newList,         var( --purple-base-main-flag-newList,         var( --default-lite-flag-newList)));
+      --purple-lite-flag-ownerList:       var( --purple-base-lite-flag-ownerList,       var( --purple-base-main-flag-ownerList,       var( --default-lite-flag-ownerList)));
+      --purple-lite-flag-priceDrop:       var( --purple-base-lite-flag-priceDrop,       var( --purple-base-main-flag-priceDrop,       var( --default-lite-flag-priceDrop)));
+      --purple-lite-flag-priceRise:       var( --purple-base-lite-flag-priceRise,       var( --purple-base-main-flag-priceRise,       var( --default-lite-flag-priceRise)));
+      --purple-lite-icon-unitInfo:        var( --purple-base-lite-icon-unitInfo,        var( --purple-base-main-icon-unitInfo,        var( --default-lite-icon-unitInfo)));
+      --purple-lite-photo-blendColor:     var( --purple-base-lite-photo-blendColor,     var( --purple-base-main-photo-blendColor,     var( --default-lite-photo-blendColor)));
+      --purple-lite-modal-coverColor:     var( --purple-base-lite-modal-coverColor,     var( --purple-base-main-modal-coverColor,     var( --default-lite-modal-coverColor)));
+      --purple-lite-showcase-gutterColor: var( --purple-base-lite-showcase-gutterColor, var( --purple-base-main-showcase-gutterColor, var( --default-lite-showcase-gutterColor)));
+    }
+    @media not all and (prefers-color-scheme: light) {
+      #main-mode:checked ~ #purple-scheme:checked ~ #scheme-container { /* Load the default scheme */
+        --colors-brandMainColor:       var( --purple-dark-brandMainColor);
+        --colors-brandAltColor:        var( --purple-dark-brandAltColor);
+        --colors-page-bgColor:         var( --purple-dark-page-bgColor);
+        --colors-page-fgColor:         var( --purple-dark-page-fgColor);
+        --colors-page-fadeColor:       var( --purple-dark-page-fadeColor);
+        --colors-page-linkColor:       var( --purple-dark-page-linkColor);
+        --colors-foot-bgColor:         var( --purple-dark-foot-bgColor);
+        --colors-foot-fgColor:         var( --purple-dark-foot-fgColor);
+        --colors-flag-textColor:       var( --purple-dark-flag-textColor);
+        --colors-flag-newList:         var( --purple-dark-flag-newList);
+        --colors-flag-ownerList:       var( --purple-dark-flag-ownerList);
+        --colors-flag-priceDrop:       var( --purple-dark-flag-priceDrop);
+        --colors-flag-priceRise:       var( --purple-dark-flag-priceRise);
+        --colors-icon-unitInfo:        var( --purple-dark-icon-unitInfo);
+        --colors-photo-blendColor:     var( --purple-dark-photo-blendColor);
+        --colors-modal-coverColor:     var( --purple-dark-modal-coverColor);
+        --colors-showcase-gutterColor: var( --purple-dark-showcase-gutterColor);
+      }
+      #alt-mode:checked ~ #purple-scheme:checked ~ #scheme-container { /* Load the default scheme */
+        --colors-brandMainColor:       var( --purple-lite-brandMainColor);
+        --colors-brandAltColor:        var( --purple-lite-brandAltColor);
+        --colors-page-bgColor:         var( --purple-lite-page-bgColor);
+        --colors-page-fgColor:         var( --purple-lite-page-fgColor);
+        --colors-page-fadeColor:       var( --purple-lite-page-fadeColor);
+        --colors-page-linkColor:       var( --purple-lite-page-linkColor);
+        --colors-foot-bgColor:         var( --purple-lite-foot-bgColor);
+        --colors-foot-fgColor:         var( --purple-lite-foot-fgColor);
+        --colors-flag-textColor:       var( --purple-lite-flag-textColor);
+        --colors-flag-newList:         var( --purple-lite-flag-newList);
+        --colors-flag-ownerList:       var( --purple-lite-flag-ownerList);
+        --colors-flag-priceDrop:       var( --purple-lite-flag-priceDrop);
+        --colors-flag-priceRise:       var( --purple-lite-flag-priceRise);
+        --colors-icon-unitInfo:        var( --purple-lite-icon-unitInfo);
+        --colors-photo-blendColor:     var( --purple-lite-photo-blendColor);
+        --colors-modal-coverColor:     var( --purple-lite-modal-coverColor);
+        --colors-showcase-gutterColor: var( --purple-lite-showcase-gutterColor);
+      }
+    }
+    @media (prefers-color-scheme: light) {
+      #main-mode:checked ~ #purple-scheme:checked ~ #scheme-container { /* Load the default scheme */
+        --colors-brandMainColor:       var( --purple-lite-brandMainColor);
+        --colors-brandAltColor:        var( --purple-lite-brandAltColor);
+        --colors-page-bgColor:         var( --purple-lite-page-bgColor);
+        --colors-page-fgColor:         var( --purple-lite-page-fgColor);
+        --colors-page-fadeColor:       var( --purple-lite-page-fadeColor);
+        --colors-page-linkColor:       var( --purple-lite-page-linkColor);
+        --colors-foot-bgColor:         var( --purple-lite-foot-bgColor);
+        --colors-foot-fgColor:         var( --purple-lite-foot-fgColor);
+        --colors-flag-textColor:       var( --purple-lite-flag-textColor);
+        --colors-flag-newList:         var( --purple-lite-flag-newList);
+        --colors-flag-ownerList:       var( --purple-lite-flag-ownerList);
+        --colors-flag-priceDrop:       var( --purple-lite-flag-priceDrop);
+        --colors-flag-priceRise:       var( --purple-lite-flag-priceRise);
+        --colors-icon-unitInfo:        var( --purple-lite-icon-unitInfo);
+        --colors-photo-blendColor:     var( --purple-lite-photo-blendColor);
+        --colors-modal-coverColor:     var( --purple-lite-modal-coverColor);
+        --colors-showcase-gutterColor: var( --purple-lite-showcase-gutterColor);
+      }
+      #alt-mode:checked ~ #purple-scheme:checked ~ #scheme-container { /* Load the default scheme */
+        --colors-brandMainColor:       var( --purple-dark-brandMainColor);
+        --colors-brandAltColor:        var( --purple-dark-brandAltColor);
+        --colors-page-bgColor:         var( --purple-dark-page-bgColor);
+        --colors-page-fgColor:         var( --purple-dark-page-fgColor);
+        --colors-page-fadeColor:       var( --purple-dark-page-fadeColor);
+        --colors-page-linkColor:       var( --purple-dark-page-linkColor);
+        --colors-foot-bgColor:         var( --purple-dark-foot-bgColor);
+        --colors-foot-fgColor:         var( --purple-dark-foot-fgColor);
+        --colors-flag-textColor:       var( --purple-dark-flag-textColor);
+        --colors-flag-newList:         var( --purple-dark-flag-newList);
+        --colors-flag-ownerList:       var( --purple-dark-flag-ownerList);
+        --colors-flag-priceDrop:       var( --purple-dark-flag-priceDrop);
+        --colors-flag-priceRise:       var( --purple-dark-flag-priceRise);
+        --colors-icon-unitInfo:        var( --purple-dark-icon-unitInfo);
+        --colors-photo-blendColor:     var( --purple-dark-photo-blendColor);
+        --colors-modal-coverColor:     var( --purple-dark-modal-coverColor);
+        --colors-showcase-gutterColor: var( --purple-dark-showcase-gutterColor);
+      }
+    }
 
-        --base-page-bgColor:     rgba(255,255,255,1);
-        --base-page-fgColor:     rgba(32,32,32,1);
-        --base-page-linkColor:   rgba(0,128,0,1);
-        --base-head-bgColor:     rgba(50,182,76,1);
-        --base-head-fgColor:     rgba(255,255,255,1);
-        --base-foot-bgColor:     rgba(71,78,82);
-        --base-foot-fgColor:     rgba(177,182,187,.5);
-        --base-showcase-bgColor: rgba(227,228,230,1);
-        --base-showcase-fgColor: rgba(32,32,32,1);
-        --base-photo-bgColor:    rgba(255,255,255,.95);
-        --base-flag-newList:     rgba(45,191,102,.70);
-        --base-flag-ownerList:   rgba(134,144,152,.45);
-        --base-flag-textColor:   rgba(255,255,255,.95);
-        --base-icon-unitInfo:    rgba(0,0,192,1);
-        --base-flag-priceDrop:   rgba(0,176,0);
-        --base-flag-priceRise:   rgba(215,0,0);
-        --base-info-fadeColor:   rgba(0,0,0,.65);
-        --base-modal-coverColor: rgba(255,255,255,.05);
-      }
-      /* Assign the colors to variables based on theme */
-      /*                  Dark theme                   */
-      :root {
-        --alt-page-bgColor:     rgba(0,0,0,1);
-        --alt-page-fgColor:     rgba(236,236,236,.85);
-        --alt-page-linkColor:   rgba(231,144,60,1);
-        --alt-head-bgColor:     rgba(50,182,76,1);
-        --alt-head-fgColor:     rgba(255,255,255,1);
-        --alt-foot-bgColor:     rgba(53,60,59,1);
-        --alt-foot-fgColor:     rgba(177,182,187,.5);
-        --alt-showcase-bgColor: rgba(0,0,0,.85);
-        --alt-showcase-fgColor: var(--base-page-fgColor);
-        --alt-photo-bgColor:    rgba(0,0,0,.55);
-        --alt-flag-newList:     rgba(145,217,165,.85);
-        --alt-flag-ownerList:   rgba(187,189,191,.45);
-        --alt-flag-textColor:   rgba(255,255,255,.85);
-        --alt-icon-unitInfo:    rgba(145,217,165,.85);
-        --alt-flag-priceDrop:   rgba(158,224,149,1);
-        --alt-flag-priceRise:   rgba(255,54,26,1);
-        --alt-info-fadeColor:   rgba(192,197,199,.85);
-        --alt-modal-coverColor: rgba(0,0,0,.55);
-      }
-    }
-    /* Assign overwrite colors for default theme. Likely defaults anyway */
-    /*   values not assigned here will use the defaults above */
-    #main-theme:checked ~ #theme-container {
-      background-color: var(--default-background);
-      color: var(--default-foreground);
-      --page-bgColor:     var(--base-page-bgColor);
-      --page-fgColor:     var(--base-page-fgColor);
-      --page-linkColor:   var(--base-page-linkColor);
-      --head-bgColor:     var(--base-head-bgColor);
-      --head-fgColor:     var(--base-head-fgColor);
-      --foot-bgColor:     var(--base-foot-bgColor);
-      --foot-fgColor:     var(--base-foot-fgColor);
-      --showcase-bgColor: var(--base-showcase-bgColor);
-      --showcase-fgColor: var(--base-showcase-fgColor);
-      --photo-bgColor:    var(--base-photo-bgColor);
-      --flag-newList:     var(--base-flag-newList);
-      --flag-ownerList:   var(--base-flag-ownerList);
-      --flag-textColor:   var(--base-flag-textColor);
-      --icon-unitInfo:    var(--base-icon-unitInfo);
-      --flag-priceDrop:   var(--base-flag-priceDrop);
-      --flag-priceRise:   var(--base-flag-priceRise);
-      --info-fadeColor:   var(--base-info-fadeColor);
-      --modal-coverColor: var(--base-modal-coverColor);
-    }
-    /* Assign overwrite colors for alternate theme. */
-    /*   values not assigned here will use the defaults above */
-    #alt-theme:checked ~ #theme-container {
-      background-color: var(--alt-background);
-      color: var(--alt-foreground);
-      --page-bgColor:     var(--alt-page-bgColor,     var(--base-page-bgColor));
-      --page-fgColor:     var(--alt-page-fgColor,     var(--base-page-fgColor));
-      --page-linkColor:   var(--alt-page-linkColor,   var(--base-page-linkColor));
-      --head-bgColor:     var(--alt-head-bgColor,     var(--base-head-bgColor));
-      --head-fgColor:     var(--alt-head-fgColor,     var(--base-head-fgColor));
-      --foot-bgColor:     var(--alt-foot-bgColor,     var(--base-foot-bgColor));
-      --foot-fgColor:     var(--alt-foot-fgColor,     var(--base-foot-fgColor));
-      --showcase-bgColor: var(--alt-showcase-bgColor, var(--base-showcase-bgColor));
-      --showcase-fgColor: var(--alt-showcase-fgColor, var(--base-showcase-fgColor));
-      --photo-bgColor:    var(--alt-photo-bgColor,    var(--base-photo-bgColor));
-      --flag-newList:     var(--alt-flag-newList,     var(--base-flag-newList));
-      --flag-ownerList:   var(--alt-flag-ownerList,   var(--base-flag-ownerList));
-      --flag-textColor:   var(--alt-flag-textColor,   var(--base-flag-textColor));
-      --icon-unitInfo:    var(--alt-icon-unitInfo,    var(--base-icon-unitInfo));
-      --flag-priceDrop:   var(--alt-flag-priceDrop,   var(--base-flag-priceDrop));
-      --flag-priceRise:   var(--alt-flag-priceRise,   var(--base-flag-priceRise));
-      --info-fadeColor:   var(--alt-info-fadeColor,   var(--base-info-fadeColor));
-      --modal-coverColor: var(--alt-modal-coverColor, var(--base-modal-coverColor));
-    }
-    #theme-container {
+
+    #scheme-container {
+      background-color: var(--colors-page-bgColor);
+      color: var(--colors-page-fgColor);
       border: 0;
       margin: 0;
     }
@@ -185,7 +505,7 @@
       list-style-type: none;
     }
     a[href] {
-      color: var(--page-linkColor);
+      color: var(--colors-page-linkColor);
       text-decoration: none;
     }
     p a {
@@ -214,14 +534,14 @@
       display: grid;
       grid-template-columns: 100%;
     }
-    /* Hide the theme state, and similar, controls */
+    /* Hide the mode and scheme states, and similar, controls */
     .hidden-control {
       display: none;
     }
   /* Site header styling */
     #site-header {
-      background-color: var(--head-bgColor);
-      color: var(--head-fgColor);
+      background-color: var(--colors-brandMainColor);
+      color: var(--colors-brandAltColor);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -251,15 +571,15 @@
       width: 1.571em;
       margin: 0 .357em;
       padding-top: .143em;
-      border: 2px solid var(--head-fgColor);
+      border: 2px solid var(--colors-brandAltColor);
       border-radius: 1.571em;
       display: inline-block;
       text-align: center;
     }
   /* Site footer styling */
     #site-footer {
-      background-color: var(--foot-bgColor);
-      color: var(--foot-fgColor);
+      background-color: var(--colors-foot-bgColor);
+      color: var(--colors-foot-fgColor);
       display: flex;
       flex-direction: column;
     }
@@ -290,21 +610,26 @@
     #copyright {
       margin-right: .5em;
     }
-    #theme-control {
+    #mode-control {
       text-align: right;
       flex-grow: 1;
       flex-wrap: nowrap;
       align-self: flex-end;
     }
-    #theme-lead {
+    #mode-lead {
       display: none;
     }
-    #alt-theme:checked ~ theme-container #alt-switch,
-    #main-theme:checked ~ theme-container #main-switch {
+    #alt-mode:checked ~ #scheme-container #alt-switch,
+    #main-mode:checked ~ #scheme-container #main-switch {
       display: none;
     }
-    #main-theme:checked ~ #theme-container #main-switch,
-    #alt-theme:checked ~ #theme-container #alt-switch {
+    #main-mode:checked ~ #scheme-container #main-switch,
+    #alt-mode:checked ~ #scheme-container #alt-switch {
+      display: none;
+    }
+    #default-scheme:checked ~ #scheme-container #default-scheme-switch,
+    #retro-scheme:checked ~ #scheme-container #retro-scheme-switch,
+    #purple-scheme:checked ~ #scheme-container #purple-scheme-switch {
       display: none;
     }
     #page-content {
@@ -314,7 +639,7 @@
     #content-header {
       position: sticky;
       top: 0;
-      background-color: var(--page-bgColor);
+      background-color: var(--colors-page-bgColor);
       z-index: 1;
     }
     #content-header div:first-child {
@@ -325,21 +650,18 @@
       padding-bottom: 15px;
     }
     #showcase {
-      background-color: var(--showcase-bgColor);
-      color: var(--showcase-fgColor);
+      background-color: var(--colors-showcase-gutterColor);
+      color: var(--colors-page-fgColor);
       padding: 15px;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       grid-gap: 15px;
       justify-content: center;
     }
-    #showcase a[href] {
-      color: inherit;
-    }
     .unit-listing {
       min-width: 220px;
       min-height: 260px;
-      background-color: var(--page-bgColor);
+      background-color: var(--colors-page-bgColor);
       border-radius: 5px;
     }
     .unit-photo {
@@ -350,7 +672,7 @@
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;
-      background-color: var(--photo-bgColor);
+      background-color: var(--colors-photo-blendColor);
       background-blend-mode: multiply;
       display: flex;
       align-items: flex-start;
@@ -361,17 +683,17 @@
     .unit-new, .unit-owner {
       padding: 0 .3em;
       display: none;
-      color: var(--flag-textColor);
+      color: var(--colors-flag-textColor);
       border-top-left-radius: 5px;
       border-bottom-right-radius: 5px;
       font-size: .857em;
       text-transform: uppercase;
     }
     .unit-new {
-      background-color: var(--flag-newList);
+      background-color: var(--colors-flag-newList);
     }
     .unit-owner {
-      background-color: var(--flag-ownerList);
+      background-color: var(--colors-flag-ownerList);
     }
     /* Add the flag to the photo for new listings */
     .new-list .unit-new {
@@ -385,8 +707,8 @@
       padding: 0 1.07em;
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
-      background-color: var(--page-bgColor);
-      color: var(--page-fgColor);
+      background-color: var(--colors-page-bgColor);
+      color: var(--colors-page-fgColor);
       display: flex;
       flex-direction: column;
       justify-content: space-around;
@@ -398,7 +720,7 @@
     /* Unless overridden in a declaration, the symbols are from the Symbola font */
     .ask-price::before, .unit-stats > li > span::before {
       font-family: 'SymbolaRegular', san-serif;
-      color: var(--icon-unitInfo);
+      color: var(--colors-icon-unitInfo);
     }
     .unit-stats > li > span::before {
       font-weight: 600;
@@ -430,14 +752,14 @@
     }
     .list-lower .ask-price::after {
       content: '\a0\2193';
-      color: var(--flag-priceDrop);
+      color: var(--colors-flag-priceDrop);
     }
     .list-higher .ask-price::after {
       content: '\a0\2191';
-      color: var(--flag-priceRise);
+      color: var(--colors-flag-priceRise);
     }
     .unit-data {
-      color: var(--info-fadeColor);
+      color: var(--colors-page-fadeColor);
     }
     .unit-stats li {
       padding: 0 .75em .143em 0;
@@ -534,7 +856,7 @@
       top: 0;
       width: 100%;
       height: 100vh;
-      background-color: var(--modal-coverColor);
+/*      background-color: var(--modal-coverColor); */
       background-blend-mode: multiply;
       visibility: hidden;
       z-index: 100;
@@ -548,9 +870,9 @@
       width: 200px;
       height: 150px;
       padding: .3em .7em;
-      background-color: var(--page-bgColor);
-      color: var(--page-fgColor);
-      border: 5px solid var(--head-bgColor);;
+      background-color: var(--colors-page-bgColor);
+      color: var(--colors-page-fgColor);
+      border: 5px solid var(--colors-brandMainColor);;
       font-size: 14px;
       text-align: center;
       display: flex;
@@ -567,8 +889,8 @@
     .modal-button {
       padding: .3em 3em;
       cursor: pointer;
-      background-color: var(--head-bgColor);
-      color: var(--head-fgColor);
+      background-color: var(--colors-brandMainColor);
+      color: var(--colors-brandAltColor);
       transform: rotateX(-90deg);
       transition: transform 1s ease-out .5s, background-color 1s ease-in .1s;
     }
@@ -594,6 +916,12 @@
     #modal-4:checked ~ #modal-layouts #modal-dialog-4 { transform: rotateY(0deg); }
     .modal-activate:checked ~ #modal-layouts .modal-button {
       transform: rotateY(0deg);
+    }
+    #settings-controls {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-content: flex-end;
     }
     @media only screen AND (min-width: 29.97rem) {
       #site-header nav {
@@ -637,10 +965,10 @@
       #footer-bar section {
         flex-wrap: nowrap;
       }
-      #theme-control {
+      #mode-control {
         flex-grow: 0;
       }
-      #theme-lead {
+      #mode-lead {
         display: inline;
       }
       #content-header {
@@ -682,9 +1010,12 @@
   </style>
 </head>
 <body>
-  <input id="main-theme" class="hidden-control" name="theme_switch" type="radio" value="main_on" checked="true">
-  <input id="alt-theme" class="hidden-control" name="theme_switch" type="radio" value="alt_on">
-<div id="theme-container">
+  <input id="main-mode" class="hidden-control" name="mode_switch" type="radio" value="main_on" checked="true">
+  <input id="alt-mode" class="hidden-control" name="mode_switch" type="radio" value="alt_on">
+  <input id="default-scheme" class="hidden-control" name="scheme_switch" type="radio" value="default_scheme" checked="True">
+  <input id="purple-scheme" class="hidden-control" name="scheme_switch" type="radio" value="purple_scheme">
+  <input id="retro-scheme" class="hidden-control" name="scheme_switch" type="radio" value="retro_scheme">
+<div id="scheme-container">
   <input name="modal_state" type="radio" id="modal-x" value="modal x" class="hidden-control" checked="true">
   <input name="modal_state" type="radio" id="modal-1" value="modal 1" class="hidden-control modal-activate">
   <input name="modal_state" type="radio" id="modal-2" value="modal 2" class="hidden-control modal-activate">
@@ -1054,7 +1385,14 @@
           <div id="copyright">Copyright © 2018 Trulia, LLC. All rights reserved.</div>
           <div>Equal Housing Opportunity.</div>
         </section>
-        <div id="theme-control"><span id="theme-lead">Enable </span><label id="main-switch" for="main-theme"><span id="main-lite">Light</span><span id="main-dark">Dark</span></label><label id="alt-switch" for="alt-theme"><span id="alt-lite">Dark</span><span id="alt-dark">Light</span></label>&nbsp;Mode</div>
+        <div id="settings-controls">
+          <div id="scheme-control">
+            <label for="default-scheme" id="default-scheme-switch">Trulia Scheme </label>
+            <label for="retro-scheme" id="retro-scheme-switch">Retro Scheme </label>
+            <label for="purple-scheme" id="purple-scheme-switch">Purple Scheme </label>
+          </div>
+          <div id="mode-control"><span id="mode-lead">Enable </span><label id="main-switch" for="main-mode"><span id="main-lite">Light</span><span id="main-dark">Dark</span></label><label id="alt-switch" for="alt-mode"><span id="alt-lite">Dark</span><span id="alt-dark">Light</span></label>&nbsp;Mode</div>
+        </div>
       </section>
     </footer>
   </div>
