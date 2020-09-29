@@ -1,7 +1,7 @@
 l08-hw04
 * Status: Final
 * CodePen: <https://codepen.io/chindraba-ga/pen/>
-* Live page: <https://www.chindraba.work/fewd/l08-hw04.html>
+* Live page: <https://fewd.chindraba.work/lessons/l08-hw04/index.html>
 
 Contents
 ================================================================================
